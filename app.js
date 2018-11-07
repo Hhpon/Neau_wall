@@ -1,5 +1,5 @@
 var express = require('express');
-var bodyParser = require('body-Parser');/*express的中间键，把传给http的文本转换为对象供路由调用*/
+var bodyParser = require('body-parser');/*express的中间键，把传给http的文本转换为对象供路由调用*/
 var Article = require('./db.js');/*链接数据库*/
 
 var app = express();
