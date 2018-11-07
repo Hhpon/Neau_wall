@@ -17,7 +17,7 @@ module.exports = {
       ref: 'origin/master',
       repo: 'git@github.com:Hhpon/Neau_wall.git',
       ssh_options: 'StrictHostKeyChecking=no',
-      path: '~/www/loveBlog/production',
+      path: '~/www/neau-wall/production',
       'post-deploy': 'npm install --registry=https://registry.npm.taobao.org && pm2 startOrRestart ecosystem.config.js --env production',
       'env': {
         NODE_ENV: 'production'
