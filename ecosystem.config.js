@@ -1,6 +1,6 @@
 module.exports = {
-  apps: [{
-    name: 'loveBlog',
+  apps : [{
+    name: 'neauWall',
     script: 'app.js',
     env: {
       NODE_ENV: 'development'
@@ -10,16 +10,16 @@ module.exports = {
     }
   }],
 
-  deploy: {
-    production: {
-      user: 'dc2-user',
-      host: '117.51.157.5',
-      ref: 'origin/master',
-      repo: 'git@github.com:Hhpon/Neau_wall.git',
+  deploy : {
+    production : {
+      user : 'dc2-user',
+      host : '117.51.157.5',
+      ref  : 'origin/master',
+      repo : 'git@github.com:Hhpon/Neau_wall.git',
+      path : '~/www/neauWall/production',
       ssh_options: 'StrictHostKeyChecking=no',
-      path: '~/www/neau-wall/production',
-      'post-deploy': 'npm install --registry=https://registry.npm.taobao.org && pm2 startOrRestart ecosystem.config.js --env production',
-      'env': {
+      'post-deploy': 'npm install --registry=https://registry.npm.taobao.org && pm2 reload ecosystem.config.js --env production',
+      env:{
         NODE_ENV: 'production'
       }
     }
