@@ -1,6 +1,13 @@
 let mongoose = require('mongoose');/*连接数据库*/
 
-mongoose.connect('mongodb://localhost:27017/blog', { useNewUrlParser: true });
+let env = process.env.NODE_ENV || 'development'
+let dbUrl = 'mongodb://127.0.0.1:20811/neauWall'
+
+if (env === 'development') {
+    dbUrl = 'mongodb://127.0.0.1/neauWall'
+}
+
+mongoose.connect(dbUrl, { useNewUrlParser: true });
 
 let articleSchema = new mongoose.Schema({
     content: String,
@@ -8,4 +15,4 @@ let articleSchema = new mongoose.Schema({
     kindof: String
 })
 
-module.exports = mongoose.model('blog', articleSchema);/*别人能访问到*/
+module.exports = mongoose.model('note', articleSchema);/*别人能访问到*/
