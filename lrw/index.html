@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background-color:#e8e8e4;
+        }
+        .title {
+            color: #bfad8d;
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .titlebar {
+            margin: 20px 10px;
+            height: 30px;
+            line-height: 30px;/*垂直居中*/
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            background-color: #e1d2c5;
+            border-radius:5px;
+        } 
+        .titlebar-class{
+            color: #76a9ab;
+        }       
+        .content{
+            padding-top: 20px;
+            height: 120px;
+            margin: 0px 10px;
+            background-color:#e1d2c5;
+            display:flex;
+            flex-direction:column;
+            align-items: center;
+            border-radius:5px;
+        }
+        .write{
+            height:30px;
+            width: 96%;
+            line-height: 30px;
+            background-color:#e2ebf0;
+            border:1px solid #999;
+            color:#666;
+            outline:none;
+            font-size:16px;
+            border-radius:5px;
+            padding-left:6px;
+        }
+        .di{
+            display:flex;
+            width: 100%;
+            padding-top: 20px;
+            justify-content: flex-end;
+        }
+        .qingxuanze{
+            height: 30px;
+            width: 60px;
+            margin: 0 5px;
+            line-height: 30px;
+            text-align: center;
+            border-radius:5px;
+            font-size:16px;
+        }
+        .name{
+            height: 28px;
+            width: 60px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            margin: 0 5px;
+            line-height: 30px;
+            text-align: center;
+            border-radius:5px;
+            background-color: #e8e7e3;
+        }
+        .fabu{
+            height: 30px;
+            width: 60px;
+            background-color: #76a9ab;
+            margin: 0 6px 0 5px;
+            line-height: 30px;
+            text-align: center;
+            color: #fff;
+            border-radius:5px;
+            font-size:16px;
+        }
+        .contentCard{
+            width: 95%;
+            box-sizing: border-box;
+            padding: 30px 10px;
+            background-color: #b3c7c7;
+            margin-top: 10px;
+            margin-left:10px;
+            margin-right:10px;
+            border-radius:5px;
+            font-size:20px;
+        }
+        .kindof-container{
+            display: flex;
+            font-size: 14px;
+            padding-bottom: 10px;
+        }
+        .sofe{
+            width: 100%;
+            text-align: center;
+            padding: 30px 0;
+            color: rgb(94, 91, 91);
+        }
+        .box1 {
+            width: 20%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background-color: #e1d2c5;
+            border-radius:5px;
+        }
+        .box2 {
+            width: 20%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background-color: white;
+            border-radius:5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="title">
+            <span>NEAU WALL</span>
+        </div>
+        <div class="titlebar">
+            <div v-bind:class="name1" v-on:click='onclick1()'>全部</div>
+            <div v-bind:class="name2" v-on:click='onclick2()'>表白</div>
+            <div v-bind:class="name3" v-on:click='onclick3()'>一句</div>
+            <div v-bind:class="name4" v-on:click='onclick4()'>吐槽</div>
+            <!-- <div v-for='(titlebar,index) in titlebars' v-on:click='titleBarHandle(index)' class={titlebar.class}>{{titlebar.title}}</div> -->
+        </div>
+        <div class="content">
+            <input type="text" class="write" name="content" placeholder="说点什么呢~" v-model='content'>
+            <div class="di">
+                <select class="qingxuanze" v-model='selected'>
+                    <option disabled value="">全部</option>
+                    <option>表白</option>
+                    <option>一句</option>
+                    <option>吐槽</option>
+                    <!-- <option v-for="option in options" v-bind:value="option.value" v-model='classification'>{{option.text}}</option> -->
+                </select>
+                <input type="text" class="name" placeholder="昵称" v-model='nickname'>
+                <div class="fabu" v-on:click='publish'>发布</div>
+            </div>
+        </div>
+        <div v-for='(Information,index) in Informations' class="contentCard">
+            <div class="kindof-container">
+                <div style='font-size:16px;'>#{{index+1}}·</div>
+                <div style='padding: 0px 4px;font-size:16px;'>{{Information.nickname}}|</div>
+                <div style='font-size:16px;'>{{Information.kindof}}</div>
+            </div>
+            <div>{{Information.content}}</div>
+        </div>
+        <div class="sofe" v-if='isShow'>
+            快来抢沙发~~~
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                content: '',
+                nickname: '',
+                seen: false,
+                selected: '表白',
+                //titlebars: [{ title: '全部', titleClass: '' }, { title: '表白', titleClass: '' }, { title: '一句', titleClass: '' }, { title: '吐槽', titleClass: '' }],
+                options: [
+                    { text: '表白', value: '表白' },
+                    { text: '一句', value: '一句' },
+                    { text: '吐槽', value: '吐槽' }
+                ],
+                classification: '表白',
+                Informations: [],
+                isShow: false,
+                titlebars_class: '',
+                name1: 'box2',
+                name2: 'box1',
+                name3: 'box1',
+                name4: 'box1',
+            },
+            mounted() {
+                this.getArticle('全部');
+            },
+            methods: {
+                getArticle(value) {
+                    let that = this;
+                    axios.get('http://lrw.hhp.im/getArticle', { params: { value: value } }).then(function (res) {
+                        console.log(res);
+                        that.Informations = res.data.reverse();
+                    })
+                },
+                publish: function () {
+                    if (this.content === "") {
+                        console.log('请输入内容')
+                        alert('发布内容至少输入1个字~');
+                        return;
+                    }
+                    if (!this.nickname) {
+                        this.nickname = '匿名';
+                    }
+                    var showContent = {
+                        kindof: this.selected,
+                        content: this.content,
+                        nickname: this.nickname
+                    };
+                    let that = this;
+                    axios.post("http://lrw.hhp.im/article", showContent).then(
+                        function (res) {
+                            console.log(res)
+                            that.selected = '表白'
+                            that.content = ''
+                            that.nickname = ''
+                            that.getArticle('全部');
+                        }
+                    );
+                },
+
+                onclick1: function () {
+                    if (this.name1 === 'box1') {
+                        this.name1 = 'box2';
+                        this.name2 = 'box1';
+                        this.name3 = 'box1';
+                        this.name4 = 'box1';
+                        this.getArticle('全部');
+                    }
+                },
+
+                onclick2: function () {
+                    if (this.name2 === 'box1') {
+                        this.name1 = 'box1';
+                        this.name2 = 'box2';
+                        this.name3 = 'box1';
+                        this.name4 = 'box1';
+                        this.selected = '表白';
+                        this.getArticle('表白');
+                    }
+                },
+
+                onclick3: function () {
+                    if (this.name3 === 'box1') {
+                        this.name1 = 'box1';
+                        this.name2 = 'box1';
+                        this.name3 = 'box2';
+                        this.name4 = 'box1';
+                        this.selected = '一句';
+                        this.getArticle('一句');
+                    }
+                },
+
+                onclick4: function () {
+                    if (this.name4 === 'box1') {
+                        this.name1 = 'box1';
+                        this.name2 = 'box1';
+                        this.name3 = 'box1';
+                        this.name4 = 'box2';
+                        this.selected = '吐槽';
+                        this.getArticle('吐槽');
+                    }
+                },
+            },
+
+        })
+    </script>
+</body>
+
+</html>
