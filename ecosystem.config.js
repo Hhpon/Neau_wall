@@ -15,7 +15,7 @@ module.exports = {
       user: 'dc2-user',
       host: '117.51.157.5',
       ref: 'origin/master',
-      repo: 'git@github.com:repo.git',
+      repo: 'git@github.com:Hhpon/Neau_wall.git',
       ssh_options: 'StrictHostKeyChecking=no',
       path: '~/www/loveBlog/production',
       'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production',
