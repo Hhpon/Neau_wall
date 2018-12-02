@@ -13,7 +13,7 @@ module.exports = {
   deploy : {
     production : {
       user : 'dc2-user',
-      host : '117.51.157.5',
+      host : '117.51.158.69',
       ref  : 'origin/master',
       repo : 'git@github.com:Hhpon/Neau_wall.git',
       path : '~/www/neauWall/production',
