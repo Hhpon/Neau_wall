@@ -9,11 +9,10 @@ if (env === 'development') {
 
 mongoose.connect(dbUrl, { useNewUrlParser: true });
 
-let articleSchema = new mongoose.Schema({
-    content: String,
-    nickname: String,
-    kindof: String,
-
+let contentSchema = new mongoose.Schema({
+    income: String,
+    date: String,
+    use: String
 })
 
-module.exports = mongoose.model('wall', articleSchema);/*别人能访问到*/
+module.exports = mongoose.model('note', contentSchema);/*别人能访问到*/
