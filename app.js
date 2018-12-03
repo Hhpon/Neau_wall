@@ -57,6 +57,14 @@ app.get('/getArticle', function (req, res) {/*获取数据库中的内容*/
     })
 })
 
+app.get('/getContent', function (req, res) {/*获取数据库中的内容*/
+    console.log(req.query);
+    let income = req.query.income;
+    let date = req.query.date;
+    let use = req.query.use;
+    
+})
+
 // app.post('/getArticle', function (req, res) {
 //     console.log(req.body);
 //     let kindof = req.body.kindof;
