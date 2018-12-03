@@ -62,7 +62,9 @@ app.get('/getContent', function (req, res) {/*获取数据库中的内容*/
     let income = req.query.income;
     let date = req.query.date;
     let use = req.query.use;
-    
+    Content.find(function (err, doc) {
+        res.json(doc)       
+    })
 })
 
 // app.post('/getArticle', function (req, res) {
