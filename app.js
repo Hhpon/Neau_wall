@@ -26,11 +26,24 @@ app.post('/article', function (req, res) {
     var content = req.body.content/*把内容从对象中拿出来*/
     var showname = req.body.showname
     var selected = req.body.selected
+    let showContent = req.body;
+    Article.create(showContent, function (err, doc) {
+        if (err) {
+            res.end('no');
+        } else {
+            console.log(doc);
+            res.end('ok');
+        }
+    })
+})
+
+
+app.post('/note',function(req,res){
     var money = req.body.money/*把内容从对象中拿出来*/
     var time = req.body.time
     var way = req.body.way
-    let showContent = req.body;
-    Article.create(showContent, function (err, doc) {
+    let showNote = req.body;
+    Article.create(showNote, function (err, doc) {
         if (err) {
             res.end('no');
         } else {
@@ -57,6 +70,14 @@ app.get('/getArticle', function (req, res) {/*获取数据库中的内容*/
     })
 })
 
+app.get('/getNote',function(req,res){
+    let income = req.query.income;
+    let date = req.query.date;
+    let use = req.query.use;
+    Article.find( function (err, doc) {
+        res.json(doc)
+    })
+})
 //app.get('/getContent', function (req, res) {/*获取数据库中的内容*/
     //console.log(req.query);
     //let income = req.query.income;
@@ -81,6 +102,7 @@ app.get('/getArticle', function (req, res) {/*获取数据库中的内容*/
 //         res.json(doc)
 //     })
 // })
+
 
 app.listen(3000, function () {
     console.log('服务器正在监听3000端口！')
