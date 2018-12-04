@@ -7,7 +7,6 @@ var app = express();
 app.use(express.static('lrw'));/*可以访问位于public文件夹的文件*/
 app.use(bodyParser.json());
 
-//allow custom header and CORS
 app.all('*', function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
@@ -36,7 +35,6 @@ app.post('/article', function (req, res) {
         }
     })
 })
-
 
 app.post('/note',function(req,res){
     var money = req.body.money/*把内容从对象中拿出来*/
@@ -78,31 +76,6 @@ app.get('/getNote',function(req,res){
         res.json(doc)
     })
 })
-//app.get('/getContent', function (req, res) {/*获取数据库中的内容*/
-    //console.log(req.query);
-    //let income = req.query.income;
-    //let date = req.query.date;
-    ///let use = req.query.use;
-    //Content.find(function (err, doc) {
-       // res.json(doc)       
-    //})
-//})
-
-// app.post('/getArticle', function (req, res) {
-//     console.log(req.body);
-//     let kindof = req.body.kindof;
-//     if (kindof === '全部') {
-//         Article.find(function (err, doc) {
-//             res.json(doc)
-//         })
-//         return;
-//     }
-//     console.log('111')
-//     Article.find({ kindof: kindof }, function (err, doc) {
-//         res.json(doc)
-//     })
-// })
-
 
 app.listen(3000, function () {
     console.log('服务器正在监听3000端口！')
