@@ -22,10 +22,6 @@ app.all('*', function (req, res, next) {
 });
 
 app.post('/article', function (req, res) {
-    console.log(req.body);
-    var content = req.body.content/*把内容从对象中拿出来*/
-    var showname = req.body.showname
-    var selected = req.body.selected
     let showContent = req.body;
     Article.create(showContent, function (err, doc) {
         if (err) {
@@ -38,11 +34,7 @@ app.post('/article', function (req, res) {
 })
 
 app.get('/getArticle', function (req, res) {/*获取数据库中的内容*/
-    console.log(req.query);
     let kindof = req.query.value;
-    let income = req.query.income;
-    let date = req.query.date;
-    let use = req.query.use;
     if (kindof === '全部') {
         Article.find(function (err, doc) {
             res.json(doc)
@@ -55,9 +47,6 @@ app.get('/getArticle', function (req, res) {/*获取数据库中的内容*/
 })
 
 app.post('/note',function(req,res){
-    var money = req.body.money/*把内容从对象中拿出来*/
-    var time = req.body.time
-    var way = req.body.way
     let showNote = req.body;
     Note.create(showNote, function (err, doc) {
         if (err) {
