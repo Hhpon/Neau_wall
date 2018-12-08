@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');/*express的中间键，把传给http的文本转换为对象供路由调用*/
 var Article = require('./db.js');/*链接数据库*/
+var Note = require('./note-db.js');/*链接数据库*/
 
 var app = express();
 
@@ -36,21 +37,6 @@ app.post('/article', function (req, res) {
     })
 })
 
-app.post('/note',function(req,res){
-    var money = req.body.money/*把内容从对象中拿出来*/
-    var time = req.body.time
-    var way = req.body.way
-    let showNote = req.body;
-    Article.create(showNote, function (err, doc) {
-        if (err) {
-            res.end('no');
-        } else {
-            console.log(doc);
-            res.end('ok');
-        }
-    })
-})
-
 app.get('/getArticle', function (req, res) {/*获取数据库中的内容*/
     console.log(req.query);
     let kindof = req.query.value;
@@ -68,11 +54,24 @@ app.get('/getArticle', function (req, res) {/*获取数据库中的内容*/
     })
 })
 
-app.get('/getNote',function(req,res){
-    let income = req.query.income;
-    let date = req.query.date;
-    let use = req.query.use;
-    Article.find( function (err, doc) {
+app.post('/note',function(req,res){
+    var money = req.body.money/*把内容从对象中拿出来*/
+    var time = req.body.time
+    var way = req.body.way
+    let showNote = req.body;
+    Note.create(showNote, function (err, doc) {
+        if (err) {
+            res.end('no');
+        } else {
+            console.log(doc);
+            res.end('ok');
+        }
+    })
+})
+
+
+app.get('/getNote', function (req, res) {
+    Note.find(function (err, doc) {
         res.json(doc)
     })
 })
