@@ -4,7 +4,7 @@ let env = process.env.NODE_ENV || 'development'
 let dbUrl = 'mongodb://127.0.0.1:27017/neauWall'
 
 if (env === 'development') {
-    dbUrl = 'mongodb://127.0.0.1/neauWall'
+    dbUrl = 'mongodb://127.0.0.1:20811/neauWall'
 }
 
 mongoose.connect(dbUrl, { useNewUrlParser: true });
