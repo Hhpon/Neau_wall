@@ -65,6 +65,6 @@ app.get('/getNote', function (req, res) {
     })
 })
 
-app.listen(3000, function () {
-    console.log('服务器正在监听3000端口！')
+app.listen(3005, function () {
+    console.log('服务器正在监听3005端口！')
 })
