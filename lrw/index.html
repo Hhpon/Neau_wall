@@ -199,7 +199,7 @@
             methods: {
                 getArticle(value) {
                     let that = this;
-                    axios.get('http://lrw.hhp.im/getArticle', { params: { value: value } }).then(function (res) {
+                    axios.get('http:////117.51.158.69:3000/getArticle', { params: { value: value } }).then(function (res) {
                         console.log(res);
                         that.Informations = res.data.reverse();
                     })
@@ -219,7 +219,7 @@
                         nickname: this.nickname
                     };
                     let that = this;
-                    axios.post("http://lrw.hhp.im/article", showContent).then(
+                    axios.post("http://117.51.158.69:3000/article", showContent).then(
                         function (res) {
                             console.log(res)
                             that.selected = '表白'
